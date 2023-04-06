@@ -3,23 +3,22 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Blog de Ariel</title>
+<title>Blog de videojuegos</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link href="{% static 'staff/default.css' %}" rel="stylesheet" type="text/css" />
 </head>
 <body>
   <div id="content">
     <div>
-      <h1>Blog de Ariel</h1>
-      <h2>Blog personal</h2>
+      <h1>Video game blogs</h1>
     </div>
     <div id="menu">
       <ul>
         <li><a href="{% url 'index' %}">Inicio</a></li>
-        <li><a href="{% url 'ver-blogs' %}">Ver blogs</a></li>
+        <li><a href="{% url 'ver-juegos' %}">Ver juegos</a></li>
         <li><a href="{% url 'hacer-publicacion' %}">Hacer una publicacion</a></li>
         <li><a href="{% url 'sobre-mi' %}">Sobre mi</a></li>
-        <li><a href="#" id="main-menu5">Salir</a></li>
+        <li><a href="{% url 'buscar-juegos' %}">Buscar juegos</a></li>
       </ul>
     </div>
 {% block contenidoquecambia %}

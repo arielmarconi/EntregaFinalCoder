@@ -8,8 +8,8 @@ def inicio(request):
 def index(request):
     return render(request, 'staff/index.html')
 
-def verBlogs(request):
-    return render(request, 'staff/ver-blogs.html')
+def verJuegos(request):
+    return render(request, 'staff/ver-juegos.html')
 
 
 def hacerPubli(request):
@@ -19,5 +19,9 @@ def hacerPubli(request):
 def sobreMi(request):
     return render(request, 'staff/sobre-mi.html')
 
+def buscarJuegos(request):
 
+    
+
+    return render(request, 'staff/buscar-juegos.html')
 

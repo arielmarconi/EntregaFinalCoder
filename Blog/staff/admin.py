@@ -1,7 +1,8 @@
 from django.contrib import admin
-from staff.models import UsuarioComun, Administrador
+from staff.models import Videojuegos
 # Register your models here.
 
-admin.site.register(UsuarioComun)
+admin.site.register(Videojuegos)
 
-admin.site.register(Administrador)
+
+
