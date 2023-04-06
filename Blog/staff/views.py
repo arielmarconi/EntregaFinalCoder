@@ -7,3 +7,17 @@ def inicio(request):
 
 def index(request):
     return render(request, 'staff/index.html')
+
+def verBlogs(request):
+    return render(request, 'staff/ver-blogs.html')
+
+
+def hacerPubli(request):
+    return render(request, 'staff/hacer-publicacion.html')
+
+
+def sobreMi(request):
+    return render(request, 'staff/sobre-mi.html')
+
+
+
