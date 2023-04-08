@@ -10,11 +10,28 @@ def index(request):
     return render(request, 'staff/index.html')
 
 def verJuegos(request):
-    return render(request, 'staff/ver-juegos.html')
+
+    juegoss = Videojuegos.objects.all()
+
+    return render(request, 'staff/ver-juegos.html', {'juegos': juegoss})
+
 
 
 def hacerPubli(request):
-    return render(request, 'staff/hacer-publicacion.html')
+
+    if request.method == "POST":
+        
+        juegos_form = BuscarJuegoForm(request.POST)
+
+        if juegos_form.is_valid():
+            datos = juegos_form.cleaned_data
+            juego = Videojuegos(nombre=datos["nombre"], compania=datos["compania"], consola=datos["consola"])
+            juego.save()
+            return render(request, 'staff/index.html')
+        
+    juegos_form = BuscarJuegoForm()
+        
+    return render(request, 'staff/hacer-publicacion.html', {"form":juegos_form})
 
 
 def sobreMi(request):
