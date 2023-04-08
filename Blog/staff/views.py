@@ -66,5 +66,32 @@ def guardar_juegos(request):
 
     return render(request, 'staff/guardar-juegos.html', {"formulario": formulario})
 
+def eliminar_juego(request, id_juego):
+
+    juego = Videojuegos.objects.get(id=id_juego)
+    name = juego.nombre
+    juego.delete()
+
+    return render(request, 'staff/eliminar-juego.html', {"juego_eliminado":name})
+
+def editarJuego(request, id_juego):
+
+    juego = Videojuegos.objects.get(id=id_juego)
+
+    if request.method == "POST":
+        juego_form = BuscarJuegoForm(request.POST)
+        if juego_form.is_valid():
+            datos = juego_form.cleaned_data
+            juego.nombre = datos["nombre"]
+            juego.compania = datos["compania"]
+            juego.consola = datos["consola"]
+            juego.save()
+            return render(request, 'staff/index.html')
+    else:
+        juego_form = BuscarJuegoForm(initial={'nombre': juego.nombre, 'compania': juego.compania, 'consola': juego.consola})
+        
+    return render(request, 'staff/editar-juego.html', {'form': juego_form})
+
+
 
 
