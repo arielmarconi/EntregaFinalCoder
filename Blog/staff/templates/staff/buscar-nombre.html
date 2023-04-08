@@ -1,0 +1,33 @@
+{% extends "staff/padre.html" %}
+
+{% load static %}
+
+{% block title %}
+Buscar nombre
+{% endblock %}
+
+{% block contenidoquecambia %}
+
+
+<form action="{% url 'resultado' %}" method="POST">
+    {% csrf_token %}
+    Nombre: <input type ="text" name ="nombre" value="">
+    <input type= "submit" value="Enviar">
+
+    </form>
+
+    <table>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Compania</th>
+        <th>Consola</th>
+        {% for juego in juegos %}
+            <td>{{ juego.nombre }}</td>
+            <td>{{ juego.compania  }}</td>
+            <td>{{ juego.consola }}</td>
+            {{ juegos }}
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

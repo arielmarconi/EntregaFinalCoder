@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from staff.models import Videojuegos
 from staff.forms import BuscarJuegoForm
+from django.db.models import Q
 # Create your views here.
 def inicio(request):
     return HttpResponse("Esta es la pagina de inicio")
@@ -93,5 +94,22 @@ def editarJuego(request, id_juego):
     return render(request, 'staff/editar-juego.html', {'form': juego_form})
 
 
+def busqueda_articulo(request):
+    return render(request,'staff/buscar-nombre.html')
 
+def buscarNombre(request):
+    
+    
+    if request.POST['nombre']:
+
+        juego = request.POST['nombre']
+        juegos = Videojuegos.objects.filter(nombre__icontains=juego)
+
+        return render(request, 'staff/resultado-busqueda.html', {"juegos":juegos})
+    
+    else:
+        respuesta = "No enviaste datos"
+
+
+    return HttpResponse(respuesta)
 

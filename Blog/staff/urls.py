@@ -1,5 +1,5 @@
 from django.urls import path
-from staff.views import index, verJuegos, hacerPubli, sobreMi, buscarJuegos, guardar_juegos, eliminar_juego, editarJuego
+from staff.views import index, verJuegos, hacerPubli, sobreMi, buscarJuegos, guardar_juegos, eliminar_juego, editarJuego, buscarNombre, busqueda_articulo
 
 
 urlpatterns = [
@@ -10,7 +10,9 @@ urlpatterns = [
     path('buscar-juegos/', buscarJuegos, name="buscar-juegos"),
     path('guardar-juegos/', guardar_juegos, name="guardar-juegos"),
     path('eliminar-juego/<int:id_juego>/', eliminar_juego, name="eliminar-juego"),
-    path('editar-juego/<int:id_juego>/', editarJuego, name="editar-juego")
+    path('editar-juego/<int:id_juego>/', editarJuego, name="editar-juego"),
+    path('buscar-nombre/', busqueda_articulo, name="buscar-nombre"),
+    path('resultado-busqueda/', buscarNombre, name='resultado')
     
     
 
