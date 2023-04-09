@@ -12,4 +12,7 @@ class Videojuegos(models.Model):
         
 
 
+        
+
+
 

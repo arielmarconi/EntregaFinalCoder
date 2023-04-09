@@ -19,11 +19,17 @@
         <li><a href="{% url 'hacer-publicacion' %}">Hacer una publicacion</a></li>
         <li><a href="{% url 'sobre-mi' %}">Sobre mi</a></li>
         <li><a href="{% url 'buscar-juegos' %}">Buscar juegos</a></li>
+        {% if request.user.is_authenticated %}
+          <li><a href="{% url 'exit' %}">Salir</a></li>
+        {% else %}
+          <li><a href="{% url 'login' %}">Ingresar</a></li>
+        {% endif %}
+
       </ul>
     </div>
 {% block contenidoquecambia %}
 {% endblock %}
-  {% comment %} <div id="right2">
+  <div id="right2">
     <h2>Recent Updates</h2>
     <p><strong>[06/09/2006]</strong> Etiam odio mi, suscipit et, rhoncus ac, lacinia, nisl. Aliquam gravida massa eu arcu. <a href="#">More&#8230;</a></p>
     <p><strong>[06/06/2006]</strong> Fusce mollis tristique sem. Sed eu eros imperdiet eros interdum blandit. Vivamus sagittis bibendum erat. Curabitur malesuada. <a href="#">More&#8230;</a></p>
@@ -34,4 +40,4 @@
   </div>
 </div>
 </body>
-</html> {% endcomment %}
+</html>

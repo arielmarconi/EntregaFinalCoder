@@ -1,8 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from staff.models import Videojuegos
 from staff.forms import BuscarJuegoForm
 from django.db.models import Q
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 def inicio(request):
     return HttpResponse("Esta es la pagina de inicio")
@@ -10,6 +15,7 @@ def inicio(request):
 def index(request):
     return render(request, 'staff/index.html')
 
+@login_required
 def verJuegos(request):
 
     juegoss = Videojuegos.objects.all()
@@ -17,7 +23,7 @@ def verJuegos(request):
     return render(request, 'staff/ver-juegos.html', {'juegos': juegoss})
 
 
-
+@login_required
 def hacerPubli(request):
 
     if request.method == "POST":
@@ -34,10 +40,11 @@ def hacerPubli(request):
         
     return render(request, 'staff/hacer-publicacion.html', {"form":juegos_form})
 
-
+@login_required
 def sobreMi(request):
     return render(request, 'staff/sobre-mi.html')
 
+@login_required
 def buscarJuegos(request):
 
     if request.method == "POST":
@@ -49,7 +56,7 @@ def buscarJuegos(request):
 
     return render(request, 'staff/buscar-juegos.html')
 
-
+@login_required
 def guardar_juegos(request):
 
     if request.method == "POST":
@@ -112,4 +119,36 @@ def buscarNombre(request):
 
 
     return HttpResponse(respuesta)
+
+def login_request(request):
+
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data = request.POST)
+
+        if form.is_valid():
+
+            usuario = form.cleaned_data.get('username')
+            contrasenia = form.cleaned_data.get('password')
+
+            user = authenticate(username= usuario, password=contrasenia)
+
+            if user is not None:
+                login(request, user)
+
+                return render(request, "staff/index.html", {"mensaje":f"Bienvenido {usuario}"})
+            else:
+                return render(request, "staff/index.html", {"mensaje":"Datos incorrectos"})
+
+        else:
+
+            return render(request, "staff/index.html", {"mensaje":"Formulario erroneo"})
+
+    form = AuthenticationForm()
+
+    return render(request, "staff/login.html", {"form": form})
+
+def exit(request):
+    logout(request)
+    return redirect('index')
+
 

@@ -9,3 +9,5 @@ class BuscarJuegoForm(forms.Form):
 
 class BuscarNombreForm(forms.Form):
     nombre = forms.CharField(max_length=30)
+
+
