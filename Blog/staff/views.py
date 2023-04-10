@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from staff.models import Videojuegos
 from staff.forms import BuscarJuegoForm
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserEditForm
 from django.db.models import Q
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
@@ -170,5 +170,28 @@ def registro(request):
 
 
     return render(request, 'registration/register.html', data)
+
+
+def editarPerfil(request):
+    usuario = request.user
+
+    if request.method == "POST":
+        form = CustomUserEditForm(request.POST)
+        if form.is_valid():
+
+            informacion = form.cleaned_data
+
+            usuario.email = informacion['email']
+            usuario.password1 = informacion['password1']
+            usuario.password2 = informacion['password2']
+            usuario.save()
+
+            return render(request, "staff/index.html", {"mensaje": "Se edito el usuario correctamente"})
+        
+    else:
+        form = CustomUserEditForm(initial={'email': usuario.email})
+
+    return render(request, "staff/editar-perfil.html", {"form":form, "usuario":usuario})
+
 
 

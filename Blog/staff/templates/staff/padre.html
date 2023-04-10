@@ -18,7 +18,10 @@
         <li><a href="{% url 'ver-juegos' %}">Ver juegos</a></li>
         <li><a href="{% url 'hacer-publicacion' %}">Hacer una publicacion</a></li>
         <li><a href="{% url 'sobre-mi' %}">Sobre mi</a></li>
-        <li><a href="{% url 'buscar-juegos' %}">Buscar juegos</a></li>
+        <li><a href="{% url 'buscar-nombre' %}">Buscar juegos</a></li>
+        {% if request.user.is_authenticated%}
+        <li><a href="{% url 'editarPerfil' %}">Editar Perfil</a></li>
+        {% endif %}
         {% if request.user.is_authenticated %}
           <li><a href="{% url 'exit' %}">Salir</a></li>
         {% else %}
