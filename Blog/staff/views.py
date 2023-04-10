@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from staff.models import Videojuegos
 from staff.forms import BuscarJuegoForm
+from .forms import CustomUserCreationForm
 from django.db.models import Q
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
@@ -150,5 +151,24 @@ def login_request(request):
 def exit(request):
     logout(request)
     return redirect('index')
+
+def registro(request):
+    data = {
+        'form': CustomUserCreationForm()
+    }
+
+    if request.method == "POST":
+        user_creation_form = CustomUserCreationForm(data=request.POST)
+
+        if user_creation_form.is_valid():
+            user_creation_form.save()
+
+            user = authenticate(username=user_creation_form.cleaned_data['username'], password=user_creation_form.cleaned_data['password1'])
+            login(request, user)
+            return redirect('index')
+        
+
+
+    return render(request, 'registration/register.html', data)
 
 
