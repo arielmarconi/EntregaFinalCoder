@@ -1,19 +1,22 @@
-
+{% extends "staff/padre.html" %}
 
 {%block title %}  Resultados de Busqueda {% endblock %}
 
 
-{%block content %}
+{%block contenidoquecambia %}
 
 
 <h1> Esta es la lista de Juegos que coinciden con tu busqueda: {{nombre}} </h1> 
 {% if juegos %}
 
-<ul> 
+<ul class="item-container"> 
     {% for juego in juegos%}
-        <li> Título: {{juego.nombre}} </li>
-        <li> Compania: {{juego.compania}} </li>
-        <li> Consola: {{juego.consola}} </li>
+        <div class="item">
+            <li> Título: {{juego.nombre}} </li>
+            <li> Compania: {{juego.compania}} </li>
+            <li> Consola: {{juego.consola}} </li>
+        </div>
+
         
 <hr>
     {% endfor %}

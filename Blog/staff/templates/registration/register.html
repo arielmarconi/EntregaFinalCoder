@@ -1,3 +1,5 @@
+{% extends "staff/padre.html" %}
+
 {% load static %}
 {% block contenidoquecambia%}
 
@@ -16,11 +18,13 @@
             <div class="card-body">
                 <h5 class+"card-title">Complete todos los campos</h5>
                 {{ form  |  crispy }}
-
-            <a href={% url 'index' %} class="card-link">Inicio</a>
-            <a href={% url 'login' %} class="card-link">Iniciar Sesion</a>
-
-        <button class="btn btn-sm btn-primary float-end"  type="submit">Registrarse</button>
+                <div class="form-buttons-container">
+                    <div>
+                        <a href={% url 'index' %} class="card-link">Inicio</a>
+                        <a href={% url 'login' %} class="card-link">Iniciar Sesion</a>
+                    </div>    
+                     <button class="btn btn-sm btn-primary button-submit"  type="submit">Registrarse</button>
+                </div>
             </div>
         </div>
         <br>

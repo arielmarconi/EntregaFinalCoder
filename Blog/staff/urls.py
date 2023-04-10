@@ -3,7 +3,7 @@ from staff.views import index, verJuegos, hacerPubli, sobreMi, buscarJuegos, gua
 
 
 urlpatterns = [
-    path('inicio/', index, name="index"),
+    path('index/', index, name="index"),
     path('ver-juegos/', verJuegos, name="ver-juegos"),
     path('hacer-publicacion/', hacerPubli, name="hacer-publicacion"),
     path('sobre-mi/', sobreMi, name="sobre-mi"),

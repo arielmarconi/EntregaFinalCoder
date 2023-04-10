@@ -1,6 +1,10 @@
 from django import forms 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+# from django.utils import timezone
+# from django.db import models
+# from django.contrib.auth import get_user_model
+# User = get_user_model()
 
 
 class BuscarJuegoForm(forms.Form):
@@ -19,10 +23,9 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class CustomUserEditForm(UserCreationForm):
-    email = forms.EmailField(label="modificar email")
-    password1 = forms.CharField(label="contrasenia", widget=forms.PasswordInput)
-    password1 = forms.CharField(label="repita contrasenia", widget=forms.PasswordInput)
-
+    email = forms.EmailField(label="Modificar email")
+    password1 = forms.CharField(label="Contrasenia", widget=forms.PasswordInput)
+    password1 = forms.CharField(label="Repita contrasenia", widget=forms.PasswordInput)
     last_name = forms.CharField()
     first_name = forms.CharField()
     class Meta:

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -6,12 +7,20 @@ class Videojuegos(models.Model):
         nombre = models.CharField(max_length=30)
         compania = models.CharField(max_length=20)
         consola = models.CharField(max_length=20)
+        
 
         def __str__(self):
                 return f"{self.id} - {self.nombre} - {self.compania} - {self.consola}"
         
 
 
+
+class Avatar(models.Model):
+        user = models.ForeignKey(User, on_delete=models.CASCADE)
+        imagen = models.ImageField(upload_to='avatares', null=True, blank= True)
+
+        def __str__(self):
+                return f'Usuario: {self.user} - Imagen: {self.imagen}'
 
 # class Posts(models.Model):
 #         title = models.CharField(max_length=250, verbose_name="Titulo")

@@ -23,8 +23,8 @@ Ver blogs
         <td>{{ juego.nombre }}</td>
         <td>{{ juego.compania }}</td>
         <td>{{ juego.consola }}</td>
-        <td><a href="{% url 'editar-juego' juego.id %}">Editar</a></td>
-        <td><a href="{% url 'eliminar-juego' juego.id %}">Eliminar</a></td>
+        <td><a href="{% url 'editar-juego' juego.id %}" class="button-small">Editar</a></td>
+        <td><a href="{% url 'eliminar-juego' juego.id %}" class="button-small">Eliminar</a></td>
 
     {% endfor %}
 

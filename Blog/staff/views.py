@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from staff.models import Videojuegos
+from staff.models import Videojuegos, Avatar
 from staff.forms import BuscarJuegoForm
 from .forms import CustomUserCreationForm, CustomUserEditForm
 from django.db.models import Q
@@ -13,8 +13,9 @@ from django.contrib.auth.decorators import login_required
 def inicio(request):
     return HttpResponse("Esta es la pagina de inicio")
 
+# @login_required
 def index(request):
-    return render(request, 'staff/index.html')
+        return render(request, 'staff/index.html')
 
 @login_required
 def verJuegos(request):
@@ -178,18 +179,26 @@ def editarPerfil(request):
     if request.method == "POST":
         form = CustomUserEditForm(request.POST)
         if form.is_valid():
-
             informacion = form.cleaned_data
 
+            usuario.username = informacion['username']
             usuario.email = informacion['email']
-            usuario.password1 = informacion['password1']
-            usuario.password2 = informacion['password2']
+            usuario.last_name = informacion['last_name']
+            usuario.first_name = informacion['first_name']
+            
+            password1 = informacion['password1']
+            password2 = informacion['password2']
+            if password1 and password2 and password1 == password2:
+                usuario.set_password(password1)
+
             usuario.save()
+
 
             return render(request, "staff/index.html", {"mensaje": "Se edito el usuario correctamente"})
         
     else:
         form = CustomUserEditForm(initial={'email': usuario.email})
+        
 
     return render(request, "staff/editar-perfil.html", {"form":form, "usuario":usuario})
 
