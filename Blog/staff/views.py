@@ -43,7 +43,7 @@ def hacerPubli(request):
                 anio=datos["anio"],
                 descripcion=datos['descripcion'],
                 imagen=datos["imagen"],
-                autor=datos['autor'],
+                autor=request.user,
                 )
             
             juego.save()
