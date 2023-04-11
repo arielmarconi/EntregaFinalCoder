@@ -21,7 +21,7 @@ Ver blogs
       <li> Consola: {{juego.consola}} </li>
       <li> Año: {{juego.anio}} </li>
       <li> Descripcion: {{juego.descripcion}} </li>
-      <li> Autor: {{juego.autor}} </li>
+      <li> Autor: {{ juego.autor.username }} </li>
       <span>
         <a href="{% url 'editar-juego' juego.id %}" class="button-small">Editar</a>
         <a href="{% url 'eliminar-juego' juego.id %}" class="button-small">Eliminar</a>

@@ -41,8 +41,9 @@ def hacerPubli(request):
                 compania=datos["compania"],
                 consola=datos["consola"],
                 anio=datos["anio"],
-                # autor=datos["autor"],
-                imagen=datos["imagen"]
+                descripcion=datos['descripcion'],
+                imagen=datos["imagen"],
+                autor=datos['autor'],
                 )
             
             juego.save()
@@ -111,7 +112,7 @@ def editarJuego(request, id_juego):
             juego.save()
             return render(request, 'staff/ver-juegos.html')
     else:
-        juego_form = BuscarJuegoForm(initial={'nombre': juego.nombre, 'compania': juego.compania, 'consola': juego.consola, 'anio': juego.anio, 'descripcion': juego.descripcion, 'autor': juego.autor, 'imagen': juego.imagen})
+        juego_form = BuscarJuegoForm(initial={'nombre': juego.nombre, 'compania': juego.compania, 'consola': juego.consola, 'anio': juego.anio, 'descripcion': juego.descripcion, 'imagen': juego.imagen})
         
     return render(request, 'staff/editar-juego.html', {'form': juego_form})
 

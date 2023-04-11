@@ -17,7 +17,7 @@ class Videojuegos(models.Model):
 
 
         def __str__(self):
-                return f"{self.id} - {self.nombre} - {self.compania} - {self.consola} - {self.descripcion} - {self.anio} - {self.imagen} - {self.autor}"
+                return f"{self.id} - {self.nombre} - {self.compania} - {self.consola} - {self.descripcion} - {self.anio} - {self.imagen}"
         
 
 
