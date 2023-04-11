@@ -14,7 +14,12 @@ Pagina de inicio
         {{ user.username  |  upper }}, bienvenido
       </h4>
     </div>
-  
+{% endif %}
+{% if not request.user.is_authenticated %}
+<h3> Bienvenido al blg de Videojuegos </h3>
+<h4> Para visualizar los blogs, por favor, ingrese a su cuenta, y, en caso de no tener una, registrese. </h4>
+
+
 {% endif %}
 
   <div id="left">

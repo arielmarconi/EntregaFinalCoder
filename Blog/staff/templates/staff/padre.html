@@ -16,8 +16,9 @@
           <li><a href="{% url 'index' %}">Inicio</a></li>
           <li><a href="{% url 'ver-juegos' %}">Ver juegos</a></li>
           <li><a href="{% url 'hacer-publicacion' %}">Hacer una publicacion</a></li>
-          <li><a href="{% url 'sobre-mi' %}">Sobre mi</a></li>
           <li><a href="{% url 'buscar-nombre' %}">Buscar juegos</a></li>
+          <li><a href="{% url 'sobre-mi' %}">Sobre mi</a></li>
+          
         </ul>
         <section>
           {% if request.user.is_authenticated%}
