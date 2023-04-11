@@ -23,6 +23,10 @@ Ver blogs
         <td>{{ juego.nombre }}</td>
         <td>{{ juego.compania }}</td>
         <td>{{ juego.consola }}</td>
+        <td>{{ juego.descripcion }}</td>
+        <td>{{ juego.anio }}</td>
+        <td>{{ juego.imagen }}</td>
+        <td>{{ juego.autor }}</td>
         <td><a href="{% url 'editar-juego' juego.id %}" class="button-small">Editar</a></td>
         <td><a href="{% url 'eliminar-juego' juego.id %}" class="button-small">Eliminar</a></td>
 

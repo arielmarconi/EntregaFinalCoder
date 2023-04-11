@@ -11,6 +11,10 @@ class BuscarJuegoForm(forms.Form):
     nombre = forms.CharField(max_length=30)
     compania = forms.CharField(max_length=20)
     consola = forms.CharField(max_length=20)
+    descripcion = forms.CharField(max_length=5000)
+    anio = forms.IntegerField()
+    imagen = forms.ImageField()
+
 
 
 class BuscarNombreForm(forms.Form):

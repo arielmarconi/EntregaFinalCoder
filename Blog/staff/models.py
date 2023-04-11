@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+from django.contrib.auth import get_user_model
+
 
 
 # Create your models here.
@@ -7,10 +10,14 @@ class Videojuegos(models.Model):
         nombre = models.CharField(max_length=30)
         compania = models.CharField(max_length=20)
         consola = models.CharField(max_length=20)
-        
+        anio = models.IntegerField(null=True)
+        descripcion = models.TextField(max_length=5000, null=True, blank=True)
+        autor = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
+        imagen = models.ImageField(upload_to='videojuegos', null=True, blank= True)
+
 
         def __str__(self):
-                return f"{self.id} - {self.nombre} - {self.compania} - {self.consola}"
+                return f"{self.id} - {self.nombre} - {self.compania} - {self.consola} - {self.descripcion}"
         
 
 

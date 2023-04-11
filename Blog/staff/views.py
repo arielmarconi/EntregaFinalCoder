@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, redirect
 from django.http import HttpResponse
 from staff.models import Videojuegos, Avatar
 from staff.forms import BuscarJuegoForm
@@ -8,6 +8,8 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView, View
+from django.core.paginator import Paginator
 
 # Create your views here.
 def inicio(request):
@@ -34,7 +36,7 @@ def hacerPubli(request):
 
         if juegos_form.is_valid():
             datos = juegos_form.cleaned_data
-            juego = Videojuegos(nombre=datos["nombre"], compania=datos["compania"], consola=datos["consola"])
+            juego = Videojuegos(nombre=datos["nombre"], compania=datos["compania"], consola=datos["consola"], anio=datos["anio"], autor=datos["autor"], imagen=datos['imagen'])
             juego.save()
             return render(request, 'staff/index.html')
         
@@ -95,6 +97,9 @@ def editarJuego(request, id_juego):
             juego.nombre = datos["nombre"]
             juego.compania = datos["compania"]
             juego.consola = datos["consola"]
+            juego.anio = datos["anio"]
+            juego.descripcion = datos["descripcion"]
+            juego.imagen = datos["imagen"]
             juego.save()
             return render(request, 'staff/index.html')
     else:
@@ -203,4 +208,11 @@ def editarPerfil(request):
     return render(request, "staff/editar-perfil.html", {"form":form, "usuario":usuario})
 
 
+class HomeView(View):
+    def get(self, request, *args, **kwargs):
 
+        context={
+
+
+        }
+        return render(request, 'staff/index.html', context)
