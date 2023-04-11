@@ -32,13 +32,21 @@ def hacerPubli(request):
 
     if request.method == "POST":
         
-        juegos_form = BuscarJuegoForm(request.POST)
+        juegos_form = BuscarJuegoForm(request.POST, request.FILES)
 
         if juegos_form.is_valid():
             datos = juegos_form.cleaned_data
-            juego = Videojuegos(nombre=datos["nombre"], compania=datos["compania"], consola=datos["consola"], anio=datos["anio"], autor=datos["autor"], imagen=datos['imagen'])
+            juego = Videojuegos(
+                nombre=datos["nombre"],
+                compania=datos["compania"],
+                consola=datos["consola"],
+                anio=datos["anio"],
+                # autor=datos["autor"],
+                imagen=datos["imagen"]
+                )
+            
             juego.save()
-            return render(request, 'staff/index.html')
+            return render(request, 'staff/ver-juegos.html')
         
     juegos_form = BuscarJuegoForm()
         
@@ -91,7 +99,7 @@ def editarJuego(request, id_juego):
     juego = Videojuegos.objects.get(id=id_juego)
 
     if request.method == "POST":
-        juego_form = BuscarJuegoForm(request.POST)
+        juego_form = BuscarJuegoForm(request.POST, files=request.FILES)
         if juego_form.is_valid():
             datos = juego_form.cleaned_data
             juego.nombre = datos["nombre"]
@@ -101,9 +109,9 @@ def editarJuego(request, id_juego):
             juego.descripcion = datos["descripcion"]
             juego.imagen = datos["imagen"]
             juego.save()
-            return render(request, 'staff/index.html')
+            return render(request, 'staff/ver-juegos.html')
     else:
-        juego_form = BuscarJuegoForm(initial={'nombre': juego.nombre, 'compania': juego.compania, 'consola': juego.consola})
+        juego_form = BuscarJuegoForm(initial={'nombre': juego.nombre, 'compania': juego.compania, 'consola': juego.consola, 'anio': juego.anio, 'descripcion': juego.descripcion, 'autor': juego.autor, 'imagen': juego.imagen})
         
     return render(request, 'staff/editar-juego.html', {'form': juego_form})
 

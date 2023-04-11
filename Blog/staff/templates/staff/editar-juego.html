@@ -7,7 +7,7 @@ Editar juego
 {% endblock %}
 
 {% block contenidoquecambia %}
-<form action="" method="POST">
+<form action="" enctype="multipart/form-data" method="POST">
     {% csrf_token %}
     <table>
 
@@ -16,6 +16,6 @@ Editar juego
 
     </table>
 
-    <input type="submit" value="Editar">
+    <input type="submit" value="Editar" class="button-submit">
 </form>
 {% endblock %}

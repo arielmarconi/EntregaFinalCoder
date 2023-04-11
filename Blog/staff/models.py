@@ -17,7 +17,7 @@ class Videojuegos(models.Model):
 
 
         def __str__(self):
-                return f"{self.id} - {self.nombre} - {self.compania} - {self.consola} - {self.descripcion}"
+                return f"{self.id} - {self.nombre} - {self.compania} - {self.consola} - {self.descripcion} - {self.anio} - {self.imagen} - {self.autor}"
         
 
 
@@ -28,7 +28,10 @@ class Avatar(models.Model):
 
         def __str__(self):
                 return f'Usuario: {self.user} - Imagen: {self.imagen}'
-
+        
+class Imagen(models.Model):
+                titulo = models.CharField(max_length=100)
+                imagen = models.ImageField(upload_to='videojuegos')
 # class Posts(models.Model):
 #         title = models.CharField(max_length=250, verbose_name="Titulo")
 #         excerpt = models.TextField(verbose_name="Bajada")

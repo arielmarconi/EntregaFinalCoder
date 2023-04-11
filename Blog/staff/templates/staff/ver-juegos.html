@@ -9,31 +9,28 @@ Ver blogs
 
 {% block contenidoquecambia %}
 
-  <table>
+<form method="post" enctype="multipart/form-data" class="hello">
 
-    <th>Id</th>
-    <th>Nombre</th>
-    <th>Compania</th>
-    <th>Consola</th>
-
+  <ul class="item-container"> 
     {% for juego in juegos %}
 
-      <tr>
-        <td>{{ juego.id }}</td>
-        <td>{{ juego.nombre }}</td>
-        <td>{{ juego.compania }}</td>
-        <td>{{ juego.consola }}</td>
-        <td>{{ juego.descripcion }}</td>
-        <td>{{ juego.anio }}</td>
-        <td>{{ juego.imagen }}</td>
-        <td>{{ juego.autor }}</td>
-        <td><a href="{% url 'editar-juego' juego.id %}" class="button-small">Editar</a></td>
-        <td><a href="{% url 'eliminar-juego' juego.id %}" class="button-small">Eliminar</a></td>
+    <div class="item">
+      <img src="{{ juego.imagen.url }}" alt="{{ juego.nombre }}"></td>
+      <li> Título: {{juego.nombre}} </li>
+      <li> Compania: {{juego.compania}} </li>
+      <li> Consola: {{juego.consola}} </li>
+      <li> Año: {{juego.anio}} </li>
+      <li> Descripcion: {{juego.descripcion}} </li>
+      <li> Autor: {{juego.autor}} </li>
+      <span>
+        <a href="{% url 'editar-juego' juego.id %}" class="button-small">Editar</a>
+        <a href="{% url 'eliminar-juego' juego.id %}" class="button-small">Eliminar</a>
+      </span>
+
+  </div>
 
     {% endfor %}
-
-      </tr>
-  </table>
-
+      </ul>
+    </form>
 {% endblock %}
   

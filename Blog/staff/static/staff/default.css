@@ -78,6 +78,15 @@ main {
 	list-style: none;
 }
 
+.item img {
+	max-height: 200px;
+}
+
+.item span {
+	display: flex;
+	justify-content: flex-end;
+}
+
 
 /** MENU */
 
