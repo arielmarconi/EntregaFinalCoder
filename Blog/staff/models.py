@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 
@@ -14,6 +14,12 @@ class Videojuegos(models.Model):
         descripcion = models.TextField(max_length=5000, null=True, blank=True)
         autor = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
         imagen = models.ImageField(upload_to='videojuegos', null=True, blank= True)
+
+        class Meta:
+                permissions = [
+                        ("can_edit_own_post", "Can edit own post"),
+
+                ]
 
 
         def __str__(self):

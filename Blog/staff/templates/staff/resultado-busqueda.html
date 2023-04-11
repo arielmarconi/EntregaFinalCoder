@@ -1,32 +1,46 @@
 {% extends "staff/padre.html" %}
 
-{%block title %}  Resultados de Busqueda {% endblock %}
-
-
 {%block contenidoquecambia %}
-
-
 <h1> Esta es la lista de Juegos que coinciden con tu busqueda: {{nombre}} </h1> 
 {% if juegos %}
-<form method="post" enctype="multipart/form-data">
-<ul class="item-container"> 
-    {% for juego in juegos%}
-        <div class="item">
-            <img src="{{ juego.imagen.url }}" alt="{{ juego.nombre }}"></td>
-            <li> Título: {{juego.nombre}} </li>
-            <li> Compania: {{juego.compania}} </li>
-            <li> Consola: {{juego.consola}} </li>
-            <li> Año: {{juego.anio}} </li>
-            <li> Descripcion: {{juego.descripcion}} </li>
-            <li> autor: {{ juego.autor.username }} </li>
-        </div>
-
-        
-<hr>
-    {% endfor %}
-    </form>
-
-</ul>
-
+    <ul class="item-container"> 
+        {% for juego in juegos%}
+            <div class="item">
+                <img src="{{ juego.imagen.url }}" alt="{{ juego.nombre }}">
+                <li> Título: {{juego.nombre}} </li>
+                <li> Compania: {{juego.compania}} </li>
+                <li> Consola: {{juego.consola}} </li>
+                <li> Año: {{juego.anio}} </li>
+                <li class="flex-container"> Descripcion: 
+                    {% if juego.descripcion|length > 50 %}
+                      <span class="short-description">{{ juego.descripcion|safe|slice:":50" }}</span>
+                      <span class="full-description" style="display:none">{{ juego.descripcion }}</span>
+                      <a href="#" class="read-more button-submit">Leer más</a>
+                    {% else %}
+                      {{ juego.descripcion }}
+                    {% endif %}
+                  </li>
+                <li> Autor: {{ juego.autor.username }} </li>
+            </div>
+            <hr>
+        {% endfor %}
+    </ul>
 {% endif %}
+
+<script>
+    const readMoreButtons = document.querySelectorAll(".read-more");
+  
+    readMoreButtons.forEach(button => {
+        let isExpanded = false
+        button.addEventListener("click", () => {
+            const descriptionPreview = button.parentElement.querySelector(".short-description");
+            const descriptionFull = button.parentElement.querySelector(".full-description");
+            isExpanded = !isExpanded
+            descriptionPreview.style.display = isExpanded ? "none" : 'inline';
+            descriptionFull.style.display = isExpanded ? "inline" : "none" ;
+  
+            button.innerText = isExpanded ? "Leer menos" : 'Leer más';
+        });
+    });
+  </script>
 {% endblock %}

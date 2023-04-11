@@ -76,16 +76,19 @@ main {
 	padding: 5px;
 	margin: 2.5px;
 	list-style: none;
+	max-width: 287px;
 }
 
-.item img {
+img {
 	max-height: 200px;
+	max-width: 100%;
 }
 
 .item span {
 	display: flex;
 	justify-content: flex-end;
 }
+
 
 
 /** MENU */
@@ -212,4 +215,17 @@ input {
 
 input:focus-visible {
 	outline: 1px solid #5E5945;
+}
+
+.short-descrption {
+	overflow: hidden;
+	max-width: calc(100%-71px);
+}
+
+.read-more {
+	font-size: 12px;
+	text-decoration: none;
+	margin: 2px;
+	padding-top: 1px;
+	padding-bottom: 1px;
 }

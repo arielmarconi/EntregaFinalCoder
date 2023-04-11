@@ -138,3 +138,9 @@ LOGOUT_REDIRECT_URL = 'index'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Blog/media')
 article_image = models.ImageField(upload_to='videojuegos', blank=True)
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'staff.backends.ObjectPermissionBackend',
+]
+

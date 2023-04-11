@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden, Http404
 from staff.models import Videojuegos, Avatar
 from staff.forms import BuscarJuegoForm
 from .forms import CustomUserCreationForm, CustomUserEditForm
@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.views.generic import TemplateView, View
 from django.core.paginator import Paginator
 
@@ -29,6 +29,7 @@ def verJuegos(request):
 
 @login_required
 def hacerPubli(request):
+    
 
     if request.method == "POST":
         
@@ -88,17 +89,20 @@ def guardar_juegos(request):
     return render(request, 'staff/guardar-juegos.html', {"formulario": formulario})
 
 def eliminar_juego(request, id_juego):
-
     juego = Videojuegos.objects.get(id=id_juego)
     name = juego.nombre
+
+    if request.user != juego.autor:
+        return HttpResponseForbidden("You are not authorized to delete this post")
+
     juego.delete()
 
     return render(request, 'staff/eliminar-juego.html', {"juego_eliminado":name})
 
 def editarJuego(request, id_juego):
-
-    juego = Videojuegos.objects.get(id=id_juego)
-
+    juego = get_object_or_404(Videojuegos, id=id_juego)
+    if request.user != juego.autor:
+        return HttpResponseForbidden("You are not authorized to edit this post.")
     if request.method == "POST":
         juego_form = BuscarJuegoForm(request.POST, files=request.FILES)
         if juego_form.is_valid():
@@ -115,7 +119,6 @@ def editarJuego(request, id_juego):
         juego_form = BuscarJuegoForm(initial={'nombre': juego.nombre, 'compania': juego.compania, 'consola': juego.consola, 'anio': juego.anio, 'descripcion': juego.descripcion, 'imagen': juego.imagen})
         
     return render(request, 'staff/editar-juego.html', {'form': juego_form})
-
 
 def busqueda_articulo(request):
     return render(request,'staff/buscar-nombre.html')
